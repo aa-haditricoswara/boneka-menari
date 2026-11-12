@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dancing Bear Overlay - TikTok Live Studio</title>
+<style>
+  html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .stage {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    pointer-events: none;
+  }
+
+  /* Kontainer Animasi Menari */
+  .character-container {
+    position: relative;
+    width: 260px;
+    height: 420px;
+    animation: danceMove 1.2s ease-in-out infinite alternate;
+    transform-origin: bottom center;
+  }
+
+  @keyframes danceMove {
+    0% {
+      transform: translateY(0px) rotate(-4deg) scaleY(1);
+    }
+    50% {
+      transform: translateY(-25px) rotate(0deg) scaleY(1.03);
+    }
+    100% {
+      transform: translateY(0px) rotate(4deg) scaleY(1);
+    }
+  }
+
+  /* Kepala Boneka */
+  .head {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    width: 200px;
+    height: 170px;
+    background: linear-gradient(135deg, #b26b42 0%, #8c4e2b 100%);
+    border-radius: 95px 95px 80px 80px;
+    box-shadow: inset -8px -8px 20px rgba(0,0,0,0.3), 0 10px 20px rgba(0,0,0,0.3);
+    animation: headBob 1.2s ease-in-out infinite alternate;
+  }
+
+  @keyframes headBob {
+    0% { transform: rotate(3deg); }
+    100% { transform: rotate(-3deg); }
+  }
+
+  /* Telinga */
+  .ear {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #7a4223;
+    border-radius: 50%;
+    top: -15px;
+    box-shadow: inset -4px -4px 10px rgba(0,0,0,0.3);
+  }
+  .ear.left { left: 10px; }
+  .ear.right { right: 10px; }
+  
+  .ear-inner {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    background: #d49a7a;
+    border-radius: 50%;
+    top: 13px;
+    left: 13px;
+  }
+
+  /* Hidung & Moncong */
+  .muzzle {
+    position: absolute;
+    bottom: 30px;
+    left: 55px;
+    width: 90px;
+    height: 70px;
+    background: #d49a7a;
+    border-radius: 45px;
+  }
+
+  .nose {
+    position: absolute;
+    top: 15px;
+    left: 33px;
+    width: 24px;
+    height: 16px;
+    background: #2b170c;
+    border-radius: 12px;
+  }
+
+  .mouth {
+    position: absolute;
+    top: 38px;
+    left: 41px;
+    width: 8px;
+    height: 12px;
+    border-bottom: 3px solid #2b170c;
+    border-radius: 50%;
+  }
+  .mouth.right {
+    left: 45px;
+  }
+
+  /* Mata */
+  .eye {
+    position: absolute;
+    top: 65px;
+    width: 18px;
+    height: 22px;
+    background: #2b170c;
+    border-radius: 50%;
+  }
+  .eye.left { left: 55px; }
+  .eye.right { right: 55px; }
+
+  /* Baju / Vest Berdasarkan Referensi */
+  .body {
+    position: absolute;
+    top: 175px;
+    left: 45px;
+    width: 170px;
+    height: 140px;
+    background: #ffffff;
+    border-radius: 35px 35px 20px 20px;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.1), 0 5px 15px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Detail Rompi Coklat & Garis */
+  .vest-pocket {
+    position: absolute;
+    top: 25px;
+    left: 20px;
+    width: 35px;
+    height: 45px;
+    background: #5c351e;
+    border-radius: 6px;
+  }
+  .vest-pocket.right {
+    left: auto;
+    right: 20px;
+  }
+
+  .red-scarf {
+    position: absolute;
+    top: -12px;
+    left: 35px;
+    width: 100px;
+    height: 30px;
+    background: #c72c2c;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+
+  /* Tangan / Lengan */
+  .arm {
+    position: absolute;
+    top: 185px;
+    width: 38px;
+    height: 90px;
+    background: #8c4e2b;
+    border-radius: 20px;
+    box-shadow: inset -3px -3px 8px rgba(0,0,0,0.3);
+  }
+  .arm.left {
+    left: 15px;
+    transform-origin: top center;
+    animation: waveLeft 0.6s ease-in-out infinite alternate;
+  }
+  .arm.right {
+    right: 15px;
+    transform-origin: top center;
+    animation: waveRight 0.6s ease-in-out infinite alternate;
+  }
+
+  @keyframes waveLeft {
+    0% { transform: rotate(15deg); }
+    100% { transform: rotate(-25deg); }
+  }
+  @keyframes waveRight {
+    0% { transform: rotate(-15deg); }
+    100% { transform: rotate(25deg); }
+  }
+
+  /* Kaki & Celana Pendek Hijau Army */
+  .shorts {
+    position: absolute;
+    top: 300px;
+    left: 65px;
+    width: 130px;
+    height: 50px;
+    background: #3b4d38;
+    border-radius: 0 0 15px 15px;
+  }
+
+  .legs {
+    position: absolute;
+    top: 340px;
+    left: 78px;
+    width: 104px;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .leg {
+    width: 36px;
+    height: 60px;
+    background: #b26b42;
+    border-radius: 10px;
+    position: relative;
+    animation: stepLeg 0.6s ease-in-out infinite alternate;
+  }
+  .leg.right {
+    animation-delay: 0.3s;
+  }
+
+  @keyframes stepLeg {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+  }
+
+  .boot {
+    position: absolute;
+    bottom: 0;
+    left: -4px;
+    width: 44px;
+    height: 24px;
+    background: #82421b;
+    border-radius: 12px 12px 6px 6px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  }
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <div class="character-container">
+    <!-- Telinga -->
+    <div class="ear left"><div class="ear-inner"></div></div>
+    <div class="ear right"><div class="ear-inner"></div></div>
+
+    <!-- Kepala -->
+    <div class="head">
+      <div class="eye left"></div>
+      <div class="eye right"></div>
+      <div class="muzzle">
+        <div class="nose"></div>
+        <div class="mouth left"></div>
+        <div class="mouth right"></div>
+      </div>
+    </div>
+
+    <!-- Lengan Kiri & Kanan -->
+    <div class="arm left"></div>
+    <div class="arm right"></div>
+
+    <!-- Badan & Rompi -->
+    <div class="body">
+      <div class="red-scarf"></div>
+      <div class="vest-pocket"></div>
+      <div class="vest-pocket right"></div>
+    </div>
+
+    <!-- Celana & Kaki -->
+    <div class="shorts"></div>
+    <div class="legs">
+      <div class="leg left"><div class="boot"></div></div>
+      <div class="leg right"><div class="boot"></div></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
